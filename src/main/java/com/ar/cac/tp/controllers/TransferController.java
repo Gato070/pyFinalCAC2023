@@ -5,10 +5,7 @@ import com.ar.cac.tp.services.TransferService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,4 +29,21 @@ public class TransferController {
     }
 
     // Crear/Registrar una transferencia
+    @PostMapping
+    public  ResponseEntity<TransferDto> createTransfer(@RequestBody TransferDto transfer){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.createTransfer(transfer));
+    }
+
+    // Modificar una transferencia (PUT)
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TransferDto> updateFullTransfer(@PathVariable Long id, @RequestBody TransferDto transferDto){
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateFullTransfer(id, transferDto));
+    }
+
+    // Eliminar una transferencia
+    // TODO: borrado lógico
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<String> deleteTransfer(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(service.deleteTransfer(id));
+    }
 }
