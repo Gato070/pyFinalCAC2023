@@ -36,8 +36,8 @@ public class TransferController {
 
     // Modificar una transferencia (PUT)
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TransferDto> updateFullTransfer(@PathVariable Long id, @RequestBody TransferDto transferDto){
-        return ResponseEntity.status(HttpStatus.OK).body(service.updateFullTransfer(id, transferDto));
+    public ResponseEntity<TransferDto> updateTransfer(@PathVariable Long id, @RequestBody TransferDto transferDto){
+        return ResponseEntity.status(HttpStatus.OK).body(service.updateTransfer(id, transferDto));
     }
 
     // Eliminar una transferencia
