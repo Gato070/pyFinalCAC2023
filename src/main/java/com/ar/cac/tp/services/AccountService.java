@@ -38,32 +38,25 @@ public class AccountService {
         return AccountMapper.accountToDto(repository.save(newAccount));
     }
 
-    public AccountDto updateAccount(Long id, AccountDto dto) {
+    public AccountDto updateAccount(Long id, AccountDto accountDto) {
         if (repository.existsById(id)){
-            Account acc = repository.findById(id).get();
+            Account accounToModify = repository.findById(id).get();
+            //validar que datos no vienen null parea setear en el objeto
 
-            if (dto.getAlias() != null){
-                acc.setAlias(dto.getAlias());
-            }
+            //logica del Patch
+            if (accountDto.getAlias() != null) accounToModify.setAlias(accountDto.getAlias());
+            if (accountDto.getCbu() != null) accounToModify.setCbu(accountDto.getCbu());
+            //if (accountDto.getName() != null) accounToModify.setName(accountDto.getName());
+            if (accountDto.getAmount() != null) accounToModify.setAmount(accountDto.getAmount());
+            //if (accountDto.getOwner() != null) accounToModify.setOwner(accountDto.getOwner());
 
-            if (dto.getType() != null){
-                acc.setType(dto.getType());
-            }
+            Account accountModified = repository.save(accounToModify);
 
-            if (dto.getCbu() != null){
-                acc.setCbu(dto.getCbu());
-            }
-
-            if (dto.getAmount() != null){
-                acc.setAmount(dto.getAmount());
-            }
-
-            return AccountMapper.accountToDto(acc);
+            return AccountMapper.accountToDto(accountModified);
 
         }else {
             return null;
         }
-
     }
 
     public String deleteAccount(Long id) {

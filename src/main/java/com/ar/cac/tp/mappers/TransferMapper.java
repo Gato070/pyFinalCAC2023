@@ -8,6 +8,27 @@ import lombok.experimental.UtilityClass;
 public class TransferMapper {
 
     public Transfer dtoToTransfer(TransferDto dto){
+        return Transfer.builder()
+                .amount(dto.getAmount())
+                .accountOrigin(dto.getAccountOrigin())
+                .accountDestination(dto.getAccountDestination())
+                .date(dto.getDate())
+                .build();
+
+    }
+
+    public TransferDto transferToDto(Transfer transfer){
+        return TransferDto.builder()
+                .id(transfer.getId())
+                .amount(transfer.getAmount())
+                .accountOrigin(transfer.getAccountOrigin())
+                .accountDestination(transfer.getAccountDestination())
+                .date(transfer.getDate())
+                .build();
+
+    }
+    /*
+    public Transfer dtoToTransfer(TransferDto dto){
         Transfer transfer = new Transfer();
         transfer.setAmount(dto.getAmount());
         transfer.setAccountOrigin(dto.getAccountOrigin());
@@ -25,5 +46,5 @@ public class TransferMapper {
         dto.setDate(transfer.getDate());
         return dto;
     }
-
+    */
 }

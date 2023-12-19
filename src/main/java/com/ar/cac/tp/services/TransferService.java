@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Service
 public class TransferService {
 
+    // Inyectamos TransferRepository & AccountRepository
     private final TransferRepository repository;
     private final AccountRepository repo_acc;
 
@@ -48,11 +49,13 @@ public class TransferService {
         Account accountOrigin = repo_acc.findById(dto.getAccountOrigin()).get();
         Account accountDestination = repo_acc.findById(dto.getAccountDestination()).get();
 
+        // Realizar la transferencia
         BigDecimal res_acc = accountOrigin.getAmount().subtract(BigDecimal.valueOf(dto.getAmount()));
         BigDecimal sum_acc = accountDestination.getAmount().add(BigDecimal.valueOf(dto.getAmount()));
         accountOrigin.setAmount(res_acc);
         accountDestination.setAmount(sum_acc);
 
+        // Guardar las transferencias
         repo_acc.save(accountOrigin);
         repo_acc.save(accountDestination);
 
@@ -123,7 +126,7 @@ public class TransferService {
         }
 
         Account accountOrigin = repo_acc.findById(dto.getAccountOrigin()).get();
-        //Account accountDestination = repo_acc.findById(dto.getAccountDestination()).get();
+        Account accountDestination = repo_acc.findById(dto.getAccountDestination()).get();
 
         if (accountOrigin.getAmount().compareTo(BigDecimal.valueOf(dto.getAmount())) < 0){
             throw new InsufficientFoundsException("Insufficient funds in the account with id: "

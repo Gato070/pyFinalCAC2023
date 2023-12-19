@@ -45,7 +45,7 @@ public class User {
 
     private LocalDateTime updated_at;
 
-    //TODO: refactor
-    //private List<Account> accounts;
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Account> accounts;
 
 }
