@@ -59,7 +59,7 @@ public class TransferService {
         repo_acc.save(accountOrigin);
         repo_acc.save(accountDestination);
 
-        //Setear fecha de transaccion
+        // Setear fecha de transacción
         dto.setDate(LocalDateTime.now());
 
         Transfer newTransfer = TransferMapper.dtoToTransfer(dto);

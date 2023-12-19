@@ -31,7 +31,7 @@ public class Transfer {
     private LocalDateTime date;
 
 
-    /* ESTO es sin usar builder funciona bien
+    /* Esto es sin usar builder funciona bien
     @Column(name = "monto")
     private Double amount;
 
